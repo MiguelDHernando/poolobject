@@ -14,7 +14,8 @@ import ubu.gii.dass.c01.Reusable;
 import ubu.gii.dass.c01.ReusablePool;
 
 /**
- * @author alumno
+ * @author Miguel DÃ­az, Eric Berlinches
+ * @version 1.0
  *
  */
 public class ReusablePoolTest {
@@ -38,7 +39,12 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testGetInstance() {
-		fail("Not yet implemented");
+		ReusablePool poolprueba1;
+		  poolprueba1=ReusablePool.getInstance();
+		  ReusablePool poolprueba2;
+		  poolprueba2=ReusablePool.getInstance();
+		  
+		  assertEquals(true,poolprueba1==poolprueba2);
 	}
 
 	/**
@@ -55,7 +61,7 @@ public class ReusablePoolTest {
 				r = p.acquireReusable();
 				i --;
 			}
-			fail("Deberia haber lanzado excepcion por máximo de instancias utilizadas");
+			fail("Deberia haber lanzado excepcion por mï¿½ximo de instancias utilizadas");
 			
 		} catch (NotFreeInstanceException e) {
 			System.out.println("lanzada excepcion esperada, limite maximo de instancias");
