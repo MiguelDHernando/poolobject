@@ -9,6 +9,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ubu.gii.dass.c01.NotFreeInstanceException;
+import ubu.gii.dass.c01.Reusable;
+import ubu.gii.dass.c01.ReusablePool;
+
 /**
  * @author alumno
  *
@@ -42,7 +46,24 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testAcquireReusable() {
-		fail("Not yet implemented");
+		int i = 3;
+		try {
+			ReusablePool p = ReusablePool.getInstance();
+			Reusable r;
+			i = 3;
+			while (i > 0) {
+				r = p.acquireReusable();
+				i --;
+			}
+			fail("Deberia haber lanzado excepcion por máximo de instancias utilizadas");
+			
+		} catch (NotFreeInstanceException e) {
+			System.out.println("lanzada excepcion esperada, limite maximo de instancias");
+			//e.printStackTrace();
+			assertEquals(i, 1);
+		}
+		
+		
 	}
 
 	/**
