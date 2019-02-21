@@ -15,7 +15,8 @@ import ubu.gii.dass.c01.Reusable;
 import ubu.gii.dass.c01.ReusablePool;
 
 /**
- * @author alumno
+ * @author Miguel Díaz, Eric Berlinches
+ * @version 1.0
  *
  */
 public class ReusablePoolTest {
@@ -39,13 +40,38 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testGetInstance() {
-		fail("Not yet implemented");
+		ReusablePool poolprueba1;
+		  poolprueba1=ReusablePool.getInstance();
+		  ReusablePool poolprueba2;
+		  poolprueba2=ReusablePool.getInstance();
+		  
+		  assertEquals(true,poolprueba1==poolprueba2);
 	}
 
 	/**
 	 * Test method for {@link ubu.gii.dass.c01.ReusablePool#acquireReusable()}.
 	 */
-	
+	@Test
+	public void testAcquireReusable() {
+		int i = 3;
+		try {
+			ReusablePool p = ReusablePool.getInstance();
+			Reusable r;
+			i = 3;
+			while (i > 0) {
+				r = p.acquireReusable();
+				i --;
+			}
+			fail("Deberia haber lanzado excepcion por m�ximo de instancias utilizadas");
+			
+		} catch (NotFreeInstanceException e) {
+			System.out.println("lanzada excepcion esperada, limite maximo de instancias");
+			//e.printStackTrace();
+			assertEquals(i, 1);
+		}
+		
+		
+	}
 
 	/**
 	 * Test method for {@link ubu.gii.dass.c01.ReusablePool#releaseReusable(ubu.gii.dass.c01.Reusable)}.
@@ -72,8 +98,5 @@ public class ReusablePoolTest {
 			//e.printStackTrace();
 			assertEquals(releasados, 2);
 		}
-		
-		
 	}
-
 }
